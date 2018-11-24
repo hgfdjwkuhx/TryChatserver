@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 # Absolute path to the directory that holds static files.
 # Example: "/home/media/media.lawrence.com/static/"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_DIR = os.path.abspath(os.path.join(SETTINGS_DIR, os.pardir))
 
@@ -19,10 +21,12 @@ except:
     DEBUG = False
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='sqlite:////{0}'.format(os.path.join(PROJECT_DIR, 'db.sqlite3'))
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 SITE_ID = 1
 
@@ -135,5 +139,5 @@ LOGGING = {
     },
 }
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [u'hvsgkd.herokuapp.com']
 
